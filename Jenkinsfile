@@ -1,29 +1,28 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo "Building Version 2"
-            }
-        }
+    environment {
+        COMPANY = "OpenAI"
+    }
 
-        stage('Test') {
+    stages {
+
+        stage('Build') {
+            environment {
+                VERSION = "1.0"
+            }
+
             steps {
-                echo "Running Tests..."
+                echo "Company: ${COMPANY}"
+                echo "Version: ${VERSION}"
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying Application..."
+                echo "Company: ${COMPANY}"
+                echo "Version: ${VERSION}"
             }
-        }
-    }
-
-    post {
-        always {
-            echo "Pipeline Finished"
         }
     }
 }
