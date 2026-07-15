@@ -1,28 +1,16 @@
-pipeline {
-    agent any
+parameters {
+    string(name: 'NAME', defaultValue: 'Abhinav')
+}
 
-    environment {
-        COMPANY = "OpenAI"
-    }
+environment {
+    NAME = "Rahul"
+}
 
-    stages {
-
-        stage('Build') {
-            environment {
-                VERSION = "1.0"
-            }
-
-            steps {
-                echo "Company: ${COMPANY}"
-                echo "Version: ${VERSION}"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Company: ${COMPANY}"
-                echo "Version: ${VERSION}"
-            }
+stages {
+    stage('Demo') {
+        steps {
+            echo "${params.NAME}"
+            sh 'echo $NAME'
         }
     }
 }
