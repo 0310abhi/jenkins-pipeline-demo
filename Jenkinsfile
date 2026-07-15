@@ -1,16 +1,19 @@
-parameters {
-    string(name: 'NAME', defaultValue: 'Abhinav')
-}
+pipeline {
+    agent any
 
-environment {
-    NAME = "Rahul"
-}
+    parameters {
+        choice(
+            name: 'ENV',
+            choices: ['Dev', 'QA', 'Stage', 'Production'],
+            description: 'Select Deployment Environment'
+        )
+    }
 
-stages {
-    stage('Demo') {
-        steps {
-            echo "${params.NAME}"
-            sh 'echo $NAME'
+    stages {
+        stage('Deploy') {
+            steps {
+                echo "Deploying to ${params.ENV}"
+            }
         }
     }
 }
